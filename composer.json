@@ -1,0 +1,15 @@
+{
+    "name": "hasanali05/php-mvc",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Md Hasan Ali",
+            "email": "hasan.bubt.40@gmail.com"
+        }
+    ],
+    "require": {}
+}
