@@ -21,6 +21,7 @@ class Request
         $root = str_replace("\\","/",$root);
         $root = str_replace($_SERVER['DOCUMENT_ROOT'],"",$root);
         $root = str_replace("/core","",$root);
+        $root = $root . '/public';
         return $root;
     }
 
