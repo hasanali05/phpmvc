@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use Core\Application;
 use Core\Controller;
+use Core\Request;
 
 class SiteController extends Controller
 {
@@ -15,8 +15,9 @@ class SiteController extends Controller
     {
         return $this->view('contact');
     }
-    public function store()
+    public function store(Request $request)
     {
+        print_r($request->getBody());
         return 'asdf';
     }
 }
