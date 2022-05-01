@@ -26,14 +26,30 @@ class Route
         }
 
         if(is_string($callback)) {
-            return $this->renderView($callback);
+            $layout = 'main';
+            return $this->renderView($layout, $callback);
         }
 
         return call_user_func($callback);
     }
 
-    public function renderView($view)
+    public function renderView($layout, $view)
     {
-        include_once __DIR__."/../views/$view.php";
+        $layoutContent = $this->layoutContent($layout);
+        $viewContent = $this->onlyViewContent($view);
+        return str_replace('{{content}}', $viewContent, $layoutContent);
+    }
+
+    protected function layoutContent($layout)
+    {
+        ob_start();
+        include_once Application::$ROOT_PATH."/views/layouts/$layout.php";
+        return ob_get_clean();
+    }
+
+    protected function onlyViewContent($view) {
+        ob_start();
+        include_once Application::$ROOT_PATH."/views/$view.php";
+        return ob_get_clean();
     }
 }
