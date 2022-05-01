@@ -7,6 +7,10 @@ use Core\Controller;
 
 class SiteController extends Controller
 {
+    public function home()
+    {
+        return Application::$app->router->renderView('main', 'home', ['name'=>'Mvc']);
+    }
     public function show()
     {
         return Application::$app->router->renderView('main', 'contact');

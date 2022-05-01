@@ -41,10 +41,10 @@ class Route
         return call_user_func($callback);
     }
 
-    public function renderView($layout, $view)
+    public function renderView($layout, $view, $params = [])
     {
         $layoutContent = $this->layoutContent($layout);
-        $viewContent = $this->onlyViewContent($view);
+        $viewContent = $this->onlyViewContent($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
@@ -55,7 +55,11 @@ class Route
         return ob_get_clean();
     }
 
-    protected function onlyViewContent($view) {
+    protected function onlyViewContent($view, $params = []) {
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+
         ob_start();
         include_once Application::$ROOT_PATH."/views/$view.php";
         return ob_get_clean();
