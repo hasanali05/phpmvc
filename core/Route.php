@@ -34,6 +34,6 @@ class Route
 
     public function renderView($view)
     {
-        return include_once __DIR__."/../views/$view.php";
+        include_once __DIR__."/../views/$view.php";
     }
 }
