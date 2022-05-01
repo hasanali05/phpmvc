@@ -34,21 +34,20 @@ class Route
         }
 
         if(is_string($callback)) {
-            $layout = 'main';
-            return $this->renderView($layout, $callback);
+            return $this->renderView($callback);
         }
 
         return call_user_func($callback);
     }
 
-    public function renderView($layout, $view, $params = [])
+    public function renderView($view, $params = [])
     {
-        $layoutContent = $this->layoutContent($layout);
+        $layoutContent = $this->layoutContent();
         $viewContent = $this->onlyViewContent($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    protected function layoutContent($layout)
+    protected function layoutContent($layout = 'main')
     {
         ob_start();
         include_once Application::$ROOT_PATH."/views/layouts/$layout.php";

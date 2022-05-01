@@ -9,11 +9,11 @@ class SiteController extends Controller
 {
     public function home()
     {
-        return Application::$app->router->renderView('main', 'home', ['name'=>'Mvc']);
+        return Application::$app->router->renderView('home', ['name'=>'Mvc']);
     }
     public function show()
     {
-        return Application::$app->router->renderView('main', 'contact');
+        return Application::$app->router->renderView('contact');
     }
     public function store()
     {
