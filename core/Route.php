@@ -17,6 +17,11 @@ class Route
         $this->routes['get'][$path]['callback'] = $callback;
     }
 
+    public function post($path, $callback)
+    {
+        $this->routes['post'][$path]['callback'] = $callback;
+    }
+
     public function resolve()
     {
         $path = $this->request->getPath();

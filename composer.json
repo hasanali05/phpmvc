@@ -2,7 +2,8 @@
     "name": "hasanali05/php-mvc",
     "autoload": {
         "psr-4": {
-            "Core\\": "core/"
+            "Core\\": "core/",
+            "App\\": "app/"
         }
     },
     "authors": [
