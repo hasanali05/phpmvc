@@ -1,18 +1,18 @@
 <?php
 namespace Core;
 
-use Core\Application as CoreApplication;
-
 class Application 
 {
     public static string $ROOT_PATH;
     public Route $router;
     public Request $request;
+    public Response $response;
 
     public function __construct($rootPath) {
         self::$ROOT_PATH = $rootPath;
         $this->request = new Request();
-        $this->router = new Route($this->request);
+        $this->response = new Response();
+        $this->router = new Route($this->request, $this->response);
     }
 
     public function run()

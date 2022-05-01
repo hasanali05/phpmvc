@@ -4,10 +4,12 @@ namespace Core;
 class Route
 {
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
-    public function __construct(Request $request) {
+    public function __construct(Request $request, Response $response) {
         $this->request = $request;
+        $this->response = $response;
     }
 
     public function get($path, $callback)
@@ -22,6 +24,7 @@ class Route
         $callback = $this->routes[$method][$path]['callback'] ?? false;
         
         if($callback === false) {
+            $this->response->setStatusCode(404);
             return "Not found";
         }
 
