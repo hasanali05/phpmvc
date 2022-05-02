@@ -25,7 +25,7 @@ class Route
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path]['callback'] ?? false;
         
         if($callback === false) {
@@ -39,6 +39,7 @@ class Route
 
         if(is_array($callback)) {
             $callback[0] = new $callback[0]();
+            Application::$app->controller = $callback[0];
         }
 
         return call_user_func($callback, $this->request);
@@ -51,8 +52,10 @@ class Route
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
-    protected function layoutContent($layout = 'main')
+    protected function layoutContent()
     {
+        $layout = Application::$app->controller->layout;
+
         ob_start();
         include_once Application::$ROOT_PATH."/views/layouts/$layout.php";
         return ob_get_clean();
